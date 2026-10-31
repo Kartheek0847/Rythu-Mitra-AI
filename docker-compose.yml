@@ -1,0 +1,23 @@
+services:
+  api:
+    build: ./apps/api
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-dev-only-change-me-before-deployment}
+      DATABASE_URL: ${DATABASE_URL:-sqlite:////data/rythu_mitra.db}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:8080}
+    volumes:
+      - appdata:/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+  web:
+    build: ./apps/web
+    environment:
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:8000}
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+volumes:
+  appdata:
