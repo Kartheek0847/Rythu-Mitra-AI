@@ -1,0 +1,11 @@
+{
+  "name": "rythu-mitra-vercel-build",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-web.mjs"
+  },
+  "dependencies": {
+    "adm-zip": "0.5.16"
+  }
+}
